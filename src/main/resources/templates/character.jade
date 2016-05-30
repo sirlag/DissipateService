@@ -1,2 +1,16 @@
 extends ./layout.jade
 block content
+    table(class="mdl-data-table mdl-js-data-table mdl-shadow--2dp")
+        thead
+            th(class="mdl-data-table__cell--non-numeric")
+            th(class="mdl-data-table__cell--non-numeric") Name
+            th(class="mdl-data-table__cell") Level
+        tbody
+            each item in character.items
+                tr
+                    td(class="mdl-data-table__cell--non-numeric")
+                        img(src="#{item.imgurl}")
+                    td(class="mdl-data-table__cell--non-numeric") #{item.name}
+                    td(class="mdl-data-table__cell") #{item.itemLevel}
+//block scripts
+    link(rel="stylesheet", href="/styles/character.css")

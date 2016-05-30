@@ -1,5 +1,10 @@
 extends ./layout.jade
+
 block content
+    if isEmpty
+        div
+            h2 Your search has returned no results
+            include searchbar
     ul(class="demo-list-two mdl-list")#characters
         each char in characters
             li(class="mdl-list__item mdl-list__item--two-line")
@@ -9,6 +14,3 @@ block content
                     span
                         a(href="#{char.URL}")#{char.name}
                     span(class="mdl-list__item-sub-title") #{char.server}
-
-
-

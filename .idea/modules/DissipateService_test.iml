@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="DissipateService_main" />
     <orderEntry type="library" name="Gradle: com.sparkjava:spark-core:2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.sparkjava:spark-template-jade:2.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.sparkjava:spark-debug-tools:0.5" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-simple:1.7.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.7.2" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />

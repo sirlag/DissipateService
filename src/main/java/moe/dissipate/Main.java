@@ -1,30 +1,37 @@
 package moe.dissipate;
 
 import moe.dissipate.ItemLevelsLibrary.ILLCharacter;
+import moe.dissipate.ItemLevelsLibrary.Player;
 import moe.dissipate.ItemLevelsLibrary.PlayerSearch;
 import spark.ModelAndView;
 import spark.template.jade.JadeTemplateEngine;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.redirect;
+import static spark.Spark.*;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
     public static void main(String[] args){
+        enableDebugScreen();
+        staticFiles.location("/public");
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Hello World!");
 
         get("/", (request, response) -> new ModelAndView(model, "index"), new JadeTemplateEngine());
 
-        get("/hello", ((request, response) -> "Hello World"));
-
-        get("/hello/:name", (req,res) -> "Hello " + req.params(":name"));
-
         get("/search", (request, response) -> {
             HashMap<String, Object> temp = new HashMap<>();
-            temp.put("characters", PlayerSearch.Search(request.queryParams("Character"), ""));
+            List<Player> players = PlayerSearch.Search(request.queryParams("Character"), "");
+            if(players!= null && players.size() == 1)
+                response.redirect(players.get(0).getURL());
+            if(players.isEmpty())
+                temp.put("isEmpty", true);
+            else
+                temp.put("isEmpty", false);
+            temp.put("characters", players);
             return new ModelAndView(temp, "search");
         }, new JadeTemplateEngine());
 

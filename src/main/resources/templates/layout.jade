@@ -2,10 +2,11 @@ doctype html
 html
     head
         title Dissipate
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet", href="https://code.getmdl.io/1.1.3/material.teal-red.min.css")
+        script(defer, src="https://code.getmdl.io/1.1.3/material.min.js")
         block scripts
-            link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-            link(rel="stylesheet", href="https://code.getmdl.io/1.1.3/material.teal-red.min.css")
-            script(defer, src="https://code.getmdl.io/1.1.3/material.min.js")
+
     body
         div(class="mdl-layout mdl-js-layout mdl-layout--fixed-header")
             header(class="mdl-layout__header")
@@ -18,9 +19,11 @@ html
                             |Home
                         form(action="/search")
                             div(class="mdl-textfield mdl-js-textfield mdl-textfield--expandable")
-                                label(class="mdl-button mdl-js-button mdl-button--icon", for="navBarSearch")
+                                label(class="mdl-button mdl-js-button mdl-button--icon", for="navBarSearch", id="navSearchLabel")
                                     i(class="material-icons")
                                         |search
+                                    div(class="mdl-tooltip mdl-tooltip--large", for="navSearchLabel")
+                                        |Search
                                 div(class="mdl-textfield__expandable-holder")
                                     input(class="mdl-textfield__input", type="text", name="Character", id="navBarSearch")
             main(class="mdl-layout__content")

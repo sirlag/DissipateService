@@ -7,7 +7,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,19 +34,22 @@ public class PlayerSearch {
             e.printStackTrace();
         }
 
-        Elements clist = characterSearchPage.select("table").get(1).select("tr");
         List<Player> players = new ArrayList<>();
-        for(Element e : clist.stream().limit(10).collect(Collectors.toList())){
-            Element temp = e.getElementsByTag("th").first();
-            String url = String.format("http://na.finalfantasyxiv.com%s", temp.select("a").attr("href"));
-            String image = temp.select("img").attr("src");
-            temp = e.getElementsByClass("player_name_gold").first();
-            String charServer = temp.getElementsByTag("span").first().text();
-            String charName = temp.getElementsByTag("a").first().text();
-            Player tempPlayer = new Player(url, charName, image, charServer);
-            players.add(tempPlayer);
+        try{
+            Elements clist = characterSearchPage.select("table").get(1).select("tr");
+            for(Element e : clist.stream().limit(10).collect(Collectors.toList())){
+                Element temp = e.getElementsByTag("th").first();
+                String url = String.format("http://na.finalfantasyxiv.com%s", temp.select("a").attr("href"));
+                String image = temp.select("img").attr("src");
+                temp = e.getElementsByClass("player_name_gold").first();
+                String charServer = temp.getElementsByTag("span").first().text();
+                String charName = temp.getElementsByTag("a").first().text();
+                Player tempPlayer = new Player(url, charName, image, charServer);
+                players.add(tempPlayer);
+            }
+        } catch (IndexOutOfBoundsException ignored){
         }
-
         return players;
+
     }
 }
