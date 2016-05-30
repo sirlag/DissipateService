@@ -21,6 +21,7 @@ public class Player {
 
     public Player(String URL, String name, String image, String server) {
         this.URL = URL.replaceAll("http://na.finalfantasyxiv.com/lodestone", "");
+        this.URL = this.URL.substring(0, this.URL.length()-1);
         Name = name;
         this.image = image;
         this.server = server;
