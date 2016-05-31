@@ -15,10 +15,11 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
     public static void main(String[] args){
-        enableDebugScreen();
+        //enableDebugScreen();
+        port(80);
         staticFiles.location("/public");
         Map<String, Object> model = new HashMap<>();
-        model.put("message", "Hello World!");
+        model.put("message", "empty");
 
         get("/", (request, response) -> new ModelAndView(model, "index"), new JadeTemplateEngine());
 
@@ -27,10 +28,7 @@ public class Main {
             List<Player> players = PlayerSearch.Search(request.queryParams("Character"), "");
             if(players!= null && players.size() == 1)
                 response.redirect(players.get(0).getURL());
-            if(players.isEmpty())
-                temp.put("isEmpty", true);
-            else
-                temp.put("isEmpty", false);
+            temp.put("isEmpty", players.isEmpty());
             temp.put("characters", players);
             return new ModelAndView(temp, "search");
         }, new JadeTemplateEngine());
