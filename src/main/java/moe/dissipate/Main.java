@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
-import static spark.debug.DebugScreen.enableDebugScreen;
+//import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
     public static void main(String[] args){
