@@ -1,7 +1,14 @@
-.character-card-wide.mdl-card {
-  width: 512px;
+.character-card-image.mdl-card {
+  width: 398px;
+  height: 590px;
 }
-.character-card-wide > .mdl-card__title {
-  color: rgba(0,0,0,0.87);
-  height: 176px;
+.character-card-image > .mdl-card__actions {
+  height: 78px;
+  padding: 16px;
+  background: rgba(0,0,0,0.4);
+}
+.character-card-image__filename {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
 }
