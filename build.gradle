@@ -18,6 +18,14 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+build.dependsOn(fatJar)
+
 task compileStylus(type:Exec){
     workingDir 'src/main/'
     commandLine 'cmd', '/c', 'stylus', 'stylus', '--out','resources/public/styles'

@@ -16,7 +16,7 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 public class Main {
     public static void main(String[] args){
         //enableDebugScreen();
-        port(80);
+        port(getHerokuAssignedPort());
         staticFiles.location("/public");
         Map<String, Object> model = new HashMap<>();
         model.put("message", "empty");
@@ -39,6 +39,14 @@ public class Main {
             temp.put("character", chara);
             return new ModelAndView(temp, "character");
         }, new JadeTemplateEngine());
+    }
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 
