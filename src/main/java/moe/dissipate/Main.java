@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
-//import static spark.debug.DebugScreen.enableDebugScreen;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
     public static void main(String[] args){
-        //enableDebugScreen();
+        enableDebugScreen();
         port(getHerokuAssignedPort());
         staticFiles.location("/public");
         Map<String, Object> model = new HashMap<>();
@@ -25,7 +25,7 @@ public class Main {
 
         get("/search", (request, response) -> {
             HashMap<String, Object> temp = new HashMap<>();
-            List<Player> players = PlayerSearch.Search(request.queryParams("Character"), "");
+            List<Player> players = PlayerSearch.Search(request.queryParams("Character"), request.queryParams("World"));
             if(players!= null && players.size() == 1)
                 response.redirect(players.get(0).getURL());
             temp.put("isEmpty", players.isEmpty());
@@ -41,7 +41,7 @@ public class Main {
         }, new JadeTemplateEngine());
     }
 
-    static int getHerokuAssignedPort() {
+    private static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
